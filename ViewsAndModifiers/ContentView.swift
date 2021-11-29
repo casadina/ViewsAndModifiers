@@ -57,6 +57,16 @@ extension View {
     }
 }
 
+struct BlueTitle: ViewModifier {
+    var text: String
+    func body(content: Content) -> some View {
+        content
+        Text(text)
+            .foregroundColor(.blue)
+        
+    }
+}
+
 struct GridStack<Content: View>: View {
     let rows: Int
     let columns: Int
@@ -77,9 +87,11 @@ struct GridStack<Content: View>: View {
 
 struct ContentView: View {
     var body: some View {
-        GridStack(rows: 4, columns: 4) {row, col in
-            Image(systemName: "\(row * 4 + col).circle")
-            Text("R\(row) C\(col)")
+        VStack {
+            GridStack(rows: 4, columns: 4) {row, col in
+                Image(systemName: "\(row * 4 + col).circle")
+                Text("R\(row) C\(col)")
+            }
         }
     }
 }
