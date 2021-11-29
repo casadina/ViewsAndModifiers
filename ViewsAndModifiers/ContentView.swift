@@ -58,12 +58,17 @@ extension View {
 }
 
 struct BlueTitle: ViewModifier {
-    var text: String
     func body(content: Content) -> some View {
         content
-        Text(text)
             .foregroundColor(.blue)
-        
+            .font(.largeTitle)
+            .padding()
+    }
+}
+
+extension View {
+    func titled() -> some View {
+        modifier(BlueTitle())
     }
 }
 
@@ -88,6 +93,7 @@ struct GridStack<Content: View>: View {
 struct ContentView: View {
     var body: some View {
         VStack {
+            CapsuleText(text: "Capsule Text Here")
             GridStack(rows: 4, columns: 4) {row, col in
                 Image(systemName: "\(row * 4 + col).circle")
                 Text("R\(row) C\(col)")
